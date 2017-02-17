@@ -1,34 +1,85 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="foundation-6.3.0-complete/css/foundation.css">
+    <link type= "text/css" rel="stylesheet" href="style.css">
     <meta charset="utf-8">
-    <title></title>
+    <title>BMI Calculator</title>
     <script src="src/person.js"></script>
     <script src="src/bmi_calculator.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script type="text/javascript">
+
   $(document).ready(function () {
-    $('#calculate').click(function () {
+    $('#calculate_bmi').click(function () {
       var w = parseFloat($('#weight').val());
       var h = parseFloat($('#height').val());
       var person = new Person({weight: w, height: h});
       person.calculate_bmi();
       $('#display_value').html('Your BMI is ' + person.bmiValue);
-      $('#display_message').html('and you are '+ person.bmiMessage);
+      $('#display_message').html('and you are ' + person.bmiMessage);
+    });
+
+    $('#calculate_bmi_imperial').click(function () {
+      var p = parseFloat($('#pounds').val());
+      var f = parseFloat($('#feet').val());
+      var i = parseFloat($('#inches').val());
+      var person = new Person({pounds: p, feet: f, inches: i});
+      person.calculate_bmi_imperial();
+      $('#display_value_imperial').html('Your BMI is' + person.bmiValue);
+      $('#display_message_imperial').html('and you are' + person.bmiMessage);
     });
   });
-</script>
+
+  </script>
+
+
+<header class="header">
+  <h1 class="headline">BMI Calculator</h1>
+</header>
+
+
+
   </head>
   <body>
-    <form>
-      <input type="text" id="weight" placeholder="Weight">
-      <input type="text" id="height" placeholder="Height">
-      <input type="button" id="calculate" value="Calculate">
-    </form>
-    <div>
+
+    <div class="row column medium-5 medium-centered">
+        <ul class="tabs text-center" data-tabs id="example-tabs">
+          <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Metric</a></li>
+          <li class="tabs-title"><a href="#panel2">Imperial</a></li>
+        </ul>
+
+  <div class="tabs-content" data-tabs-content="example-tabs">
+    <div class="tabs-panel is-active" id="panel1">
+      <form>
+        <input type="text" id="weight" placeholder="Weight">
+        <input type="text" id="height" placeholder="Height">
+        <input type="button" id="calculate_bmi" value="Calculate">
+      </form>
+      <div>
       <span id="display_value"></span>
       <span id="display_message"></span>
-
     </div>
+    </div>
+
+    <div class="tabs-panel" id="panel2">
+      <form>
+        <input type="text" id="pounds" placeholder="Pounds">
+        <input type="text" id="feet" placeholder="Feet">
+        <input type="text" id="inches" placeholder="Inches">
+        <input type="button" id="calculate_bmi_imperial" value="Calculate">
+      </form>
+      <div>
+      <span id="display_value_imperial"></span>
+      <span id="display_message_imperial"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="foundation-6.3.0-complete/js/vendor/jquery.js"></script>
+  <script src="foundation-6.3.0-complete/js/vendor/what-input.js"></script>
+  <script src="foundation-6.3.0-complete/js/vendor/foundation.js"></script>
+  <script src="foundation-6.3.0-complete/js/app.js"></script>
   </body>
 </html>
